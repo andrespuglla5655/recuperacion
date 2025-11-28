@@ -61,7 +61,7 @@ def home():
     return f"""
     <html>
         <head>
-            <title>Flask App - Andres Prueba</title>
+            <title>Flask App - Andres</title>
             <style>
                 body {{ font-family: Arial, sans-serif; margin: 40px; background-color: #f0f0f0; }}
                 .container {{ background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }}
@@ -81,7 +81,7 @@ def home():
         </head>
         <body>
             <div class="container">
-                <h1>🚀 ChatBot AI - Preguntas y Respuestas</h1>
+                <h1>🚀 ChatBot AI - Preguntass</h1>
                 <p class="version">{version_info}</p>
                 <div class="info">
                     <h3>📊 Información del Sistema:</h3>
