@@ -54,12 +54,13 @@ jobs:
       id: meta
       run: |
         echo "REPO_LOWER=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
-        echo "VERSION=1.0.5" >> $GITHUB_ENV
+        echo "VERSION=3.0.0" >> $GITHUB_ENV
 
     - name: 🚀 Build and push Docker image
       uses: docker/build-push-action@v6
       with:
         context: .
+        file: ./puglla
         push: true
         tags: |
           ghcr.io/${{ env.REPO_LOWER }}:latest
@@ -127,10 +128,10 @@ jobs:
           echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
           
           # Descargar la última imagen
-          docker pull ghcr.io/andrespuglla5655/recuperacion:puglla-1.0.5
+          docker pull ghcr.io/andrespuglla5655/recuperacion:puglla-3.0.0
           
           # Desplegar stack
-          docker stack deploy -c stack.yml recuperacion
+          docker stack deploy -c puglla.yml recuperacion
           
           docker service ls
           echo "✅ Deployment completado"

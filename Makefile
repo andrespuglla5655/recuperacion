@@ -1,5 +1,5 @@
 APP_NAME=andres
-STACK_FILE=stack.yml
+STACK_FILE=puglla.yml
 
 build:
 	docker build -t $(APP_NAME):latest .

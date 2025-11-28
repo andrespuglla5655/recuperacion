@@ -196,7 +196,7 @@ def saludo(nombre):
         <body>
             <div class="container">
                 <h2>👋 Hola {nombre}!</h2>
-                <p>Bienvenido a <strong>puglla.byronrm.com</strong></p>
+                <p>Bienvenido a <strong>byron.byronrm.com</strong></p>
                 <p>✅ Esta ruta confirma que el despliegue fue exitoso</p>
                 <a href="/" style="color: #3498db;">← Volver al inicio</a>
             </div>
@@ -206,7 +206,7 @@ def saludo(nombre):
 
 @app.route('/health')
 def health():
-    return {"status": "healthy", "service": "andres-flask-app", "version": "1.0.5"}
+    return {"status": "healthy", "service": "andres-flask-app", "version": "3.0.0"}
 
 if __name__ == '__main__':
     # Get port from environment variable or default to 5000

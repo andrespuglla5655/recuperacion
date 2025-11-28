@@ -25,7 +25,7 @@ def test_health_endpoint():
         data = response.get_json()
         assert data['status'] == 'healthy'
         assert data['service'] == 'andres-flask-app'
-        assert data['version'] == '1.0.5'
+        assert data['version'] == '3.0.0'
 
 def test_saludo_endpoint():
     """Test that the saludo endpoint works with a name"""
@@ -33,7 +33,7 @@ def test_saludo_endpoint():
         response = client.get('/saludo/Andres')
         assert response.status_code == 200
         assert b'Hola Andres!' in response.data
-        assert b'puglla.byronrm.com' in response.data
+        assert b'byron.byronrm.com' in response.data
 
 def test_ask_endpoint_success():
     """Test that the ask endpoint responds to questions"""
