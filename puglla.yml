@@ -8,11 +8,11 @@ services:
       labels:
         - "traefik.enable=true"
         - "traefik.http.routers.puglla.entrypoints=http"
-        - "traefik.http.routers.puglla.rule=Host(`byron.byronrm.com`)"
+        - "traefik.http.routers.puglla.rule=Host(`andres.byronrm.com`)"
         - "traefik.http.middlewares.puglla-https-redirect.redirectscheme.scheme=https"
         - "traefik.http.routers.puglla.middlewares=puglla-https-redirect"
         - "traefik.http.routers.puglla-secure.entrypoints=https"
-        - "traefik.http.routers.puglla-secure.rule=Host(`byron.byronrm.com`)"
+        - "traefik.http.routers.puglla-secure.rule=Host(`andres.byronrm.com`)"
         - "traefik.http.routers.puglla-secure.tls=true"
         - "traefik.http.routers.puglla-secure.tls.certresolver=http"
         - "traefik.http.routers.puglla-secure.service=puglla"
