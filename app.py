@@ -81,7 +81,7 @@ def home():
         </head>
         <body>
             <div class="container">
-                <h1>🚀 Examen</h1>
+                <h1>🚀 Examen byron</h1>
                 <p class="version">{version_info}</p>
                 <div class="info">
                     <h3>📊 Información del Sistema:</h3>
