@@ -24,7 +24,7 @@ def test_health_endpoint():
         assert response.status_code == 200
         data = response.get_json()
         assert data['status'] == 'healthy'
-        assert data['service'] == 'andres-flask-app'
+        assert data['service'] == 'byron-flask-app'
         assert data['version'] == '3.0.0'
 
 def test_saludo_endpoint():

@@ -23,8 +23,8 @@ def get_bot_response(question):
         "what can you do": "I can answer simple questions. Ask me anything!",
         "adiós": "¡Adiós! Fue un placer ayudarte.",
         "bye": "Goodbye! It was nice helping you.",
-        "nombre": "Me llamo ChatBotAI, tu asistente virtual.",
-        "name": "My name is ChatBotAI, your virtual assistant.",
+        "nombre": "Me llamo ChatBotAI, el asistente virtual de Byron.",
+        "name": "My name is ChatBotAI, Byron's virtual assistant.",
         "ayuda": "Puedes preguntarme cualquier cosa y haré mi mejor esfuerzo por ayudarte.",
         "help": "You can ask me anything and I'll do my best to help you."
     }
@@ -57,11 +57,11 @@ def home():
         with open('VERSION', 'r') as f:
             version_info = f.read().strip()
     except:
-        version_info = 'Versión 1.0.5'
+        version_info = 'Versión 3.0.0'
     return f"""
     <html>
         <head>
-            <title>Flask App - Andres</title>
+            <title>Flask App - Byron</title>
             <style>
                 body {{ font-family: Arial, sans-serif; margin: 40px; background-color: #f0f0f0; }}
                 .container {{ background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }}
@@ -81,7 +81,7 @@ def home():
         </head>
         <body>
             <div class="container">
-                <h1>🚀 ChatBot AI - Preguntass</h1>
+                <h1>🚀 ChatBot AI - Preguntas de Byron</h1>
                 <p class="version">{version_info}</p>
                 <div class="info">
                     <h3>📊 Información del Sistema:</h3>
@@ -89,7 +89,7 @@ def home():
                     <p><strong>IP:</strong> {system_info['ip']}</p>
                     <p><strong>Python:</strong> {system_info['python_version']}</p>
                 </div>
-                <p>✅ Aplicación desplegada correctamente con GitHub Actions y Docker Swarm</p>
+                <p>✅ Aplicación de Byron desplegada correctamente en <strong>byron.byronrm.com</strong> con GitHub Actions y Docker Swarm</p>
                 
                 <div class="chat-container">
                     <h3>💬 ChatBot AI</h3>
@@ -197,7 +197,7 @@ def saludo(nombre):
             <div class="container">
                 <h2>👋 Hola {nombre}!</h2>
                 <p>Bienvenido a <strong>byron.byronrm.com</strong></p>
-                <p>✅ Esta ruta confirma que el despliegue fue exitoso</p>
+                <p>✅ Esta ruta confirma que el despliegue de la aplicación de Byron fue exitoso</p>
                 <a href="/" style="color: #3498db;">← Volver al inicio</a>
             </div>
         </body>
@@ -206,7 +206,7 @@ def saludo(nombre):
 
 @app.route('/health')
 def health():
-    return {"status": "healthy", "service": "andres-flask-app", "version": "3.0.0"}
+    return {"status": "healthy", "service": "byron-flask-app", "version": "3.0.0"}
 
 if __name__ == '__main__':
     # Get port from environment variable or default to 5000
