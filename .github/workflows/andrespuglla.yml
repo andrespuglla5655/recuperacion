@@ -1,0 +1,105 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 🧾 Checkout repository
+      uses: actions/checkout@v4
+
+    - name: 🔐 Login to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: 🏷️ Prepare Docker metadata
+      id: meta
+      run: |
+        echo "REPO_LOWER=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
+    - name: 🚀 Build and push Docker image
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: true
+        tags: |
+          ghcr.io/${{ env.REPO_LOWER }}:latest
+          ghcr.io/${{ env.REPO_LOWER }}:${{ github.sha }}
+
+    - name: ✅ Image published successfully
+      run: |
+        echo "Imagen publicada correctamente."
+        echo "Iniciando despliegue..."
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: 🔎 Verificar secrets requeridos
+      run: |
+        if [ -z "${{ secrets.VPS_PASSWORD }}" ]; then
+          echo "❌ Falta VPS_PASSWORD"
+          exit 1
+        fi
+        if [ -z "${{ secrets.VPS_HOST }}" ]; then
+          echo "❌ Falta VPS_HOST"
+          exit 1
+        fi
+        if [ -z "${{ secrets.VPS_USER }}" ]; then
+          echo "❌ Falta VPS_USER"
+          exit 1
+        fi
+        if [ -z "${{ secrets.VPS_SSH_PORT }}" ]; then
+          echo "❌ Falta VPS_SSH_PORT"
+          exit 1
+        fi
+
+    - name: 🧾 Mostrar variables básicas
+      run: |
+        echo "Host: ${{ secrets.VPS_HOST }}"
+        echo "Usuario: ${{ secrets.VPS_USER }}"
+        echo "Puerto: ${{ secrets.VPS_SSH_PORT }}"
+
+    - name: 🧪 Probar conexión SSH
+      uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        password: ${{ secrets.VPS_PASSWORD }}
+        port: ${{ secrets.VPS_SSH_PORT }}
+        script: |
+          echo "Conexión SSH exitosa"
+          hostname
+          whoami
+          uptime
+
+    - name: 🔐 Deploy to Server
+      uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        password: ${{ secrets.VPS_PASSWORD }}
+        port: ${{ secrets.VPS_SSH_PORT }}
+        script: |
+          echo "🚀 Empezando deployment..."
+          cd ~/andresprueba
+          git pull origin main
+          docker pull ghcr.io/andrespuglla5655/andresprueba:latest
+          docker stack deploy -c stack.yml andres
+          docker service ls
+          echo "✅ Deployment completado"
