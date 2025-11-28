@@ -53,7 +53,7 @@ Para el despliegue automático, se deben configurar las siguientes variables sec
 ├── app.py              # Aplicación Flask principal
 ├── requirements.txt    # Dependencias de Python
 ├── Dockerfile          # Configuración de Docker
-├── stack.yml           # Configuración de Docker Swarm
+├── puglla.yml           # Configuración de Docker Swarm
 ├── render.yaml         # Configuración para Render.com
 ├── VERSION             # Archivo de versión
 ├── tests/              # Pruebas automatizadas
@@ -99,7 +99,7 @@ Para desplegar manualmente:
 
 1. Desplegar con Docker Swarm:
    ```bash
-   docker stack deploy -c stack.yml recuperacion
+   docker stack deploy -c puglla.yml recuperacion
    ```
 
 ## Versionado
@@ -111,7 +111,7 @@ La imagen se etiqueta automáticamente con:
 
 ## Acceso
 
-La aplicación estará disponible en: http://puglla.byronrm.com (cuando se configure el DNS)
+La aplicación estará disponible en: http://byron.byronrm.com
 
 ## Desarrollo Local
 
