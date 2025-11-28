@@ -10,16 +10,30 @@ Aplicación Flask con inteligencia artificial capaz de contestar preguntas media
 - Pruebas automatizadas con pytest
 - Contenerización con Docker
 - Despliegue automático con GitHub Actions
-- Integración con Traefik para enrutamiento
-- Monitoreo de salud del servicio
+- Compatible con Render.com para despliegue fácil
 
 ## Requisitos
 
-- Docker
-- Docker Swarm (para despliegue en producción)
-- Acceso a un VPS con Traefik configurado
+- Python 3.12
+- Docker (opcional)
+- Cuenta en Render.com (para despliegue en la nube)
 
-## Despliegue
+## Despliegue en Render
+
+1. Crea una cuenta en [Render.com](https://render.com)
+2. Haz fork de este repositorio o conéctalo directamente desde GitHub
+3. En Render, selecciona "Web Service"
+4. Conecta tu repositorio
+5. Configura las siguientes opciones:
+   - **Name**: recuperacion-chatbot
+   - **Runtime**: Python 3
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `gunicorn --bind 0.0.0.0:$PORT app:app`
+6. Haz clic en "Create Web Service"
+
+La aplicación se desplegará automáticamente y estará disponible en una URL única proporcionada por Render.
+
+## Despliegue con Docker Swarm
 
 El despliegue se realiza automáticamente mediante GitHub Actions cuando se hace push a la rama `main`.
 
@@ -40,6 +54,7 @@ Para el despliegue automático, se deben configurar las siguientes variables sec
 ├── requirements.txt    # Dependencias de Python
 ├── Dockerfile          # Configuración de Docker
 ├── stack.yml           # Configuración de Docker Swarm
+├── render.yaml         # Configuración para Render.com
 ├── VERSION             # Archivo de versión
 ├── tests/              # Pruebas automatizadas
 │   ├── __init__.py
@@ -64,7 +79,7 @@ pip install -r requirements.txt
 pytest -v
 ```
 
-## Despliegue Manual
+## Despliegue Manual con Docker
 
 Para desplegar manualmente:
 
@@ -73,7 +88,16 @@ Para desplegar manualmente:
    docker build -t recuperacion:latest .
    ```
 
-2. Desplegar con Docker Swarm:
+2. Ejecutar el contenedor:
+   ```bash
+   docker run -p 5000:5000 recuperacion:latest
+   ```
+
+3. La aplicación estará disponible en http://localhost:5000
+
+## Despliegue Manual con Docker Swarm
+
+1. Desplegar con Docker Swarm:
    ```bash
    docker stack deploy -c stack.yml recuperacion
    ```
@@ -87,9 +111,9 @@ La imagen se etiqueta automáticamente con:
 
 ## Acceso
 
-La aplicación estará disponible en: http://puglla.byronrm.com
+La aplicación estará disponible en: http://puglla.byronrm.com (cuando se configure el DNS)
 
-## Desarrollo
+## Desarrollo Local
 
 Para ejecutar localmente:
 
