@@ -73,9 +73,9 @@ jobs:
           script: |
             echo "Pulling latest Docker image"
             docker pull ghcr.io/andrespuglla5655/recuperacion:puglla
-            echo "Stopping existing container"
-            docker stop recuperacion_app || true
-            docker rm recuperacion_app || true
-            echo "Starting new container"
-            docker run -d --name recuperacion_app -p 80:80 ghcr.io/andrespuglla5655/recuperacion:puglla
+            echo "Downloading deployment files"
+            wget -O docker-compose.prod.yml https://raw.githubusercontent.com/andrespuglla5655/recuperacion/puglla/docker-compose.prod.yml
+            echo "Deploying with Docker Compose"
+            docker-compose -f docker-compose.prod.yml down
+            docker-compose -f docker-compose.prod.yml up -d
             echo "Deployment completed"
