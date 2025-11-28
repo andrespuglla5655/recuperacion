@@ -3,10 +3,10 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - puglla
   pull_request:
     branches:
-      - main
+      - puglla
   workflow_dispatch:
 
 permissions:
@@ -37,7 +37,7 @@ jobs:
   build-and-push:
     needs: test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/puglla'
 
     steps:
     - name: 🧾 Checkout repository
@@ -74,7 +74,7 @@ jobs:
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/puglla'
 
     steps:
     - name: 🔎 Verificar secrets requeridos
@@ -132,7 +132,7 @@ jobs:
           if [ ! -d ".git" ]; then
             git clone https://github.com/andrespuglla5655/recuperacion.git .
           else
-            git pull origin main
+            git pull origin puglla
           fi
           
           # Pull de la imagen Docker con el tag correcto
