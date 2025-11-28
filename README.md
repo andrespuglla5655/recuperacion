@@ -19,11 +19,16 @@ This is a Python Flask application with Docker support and CI/CD pipeline.
   - VPS_SSH_KEY: Private SSH key for authentication
   - VPS_PORT: SSH port (usually 22)
 
-## VPS Setup
+## Detailed Deployment Guide
+
+For comprehensive deployment instructions, please refer to the [DEPLOYMENT.md](file:///C:/Users/Andres/Desktop/recuperacion/DEPLOYMENT.md) file.
+
+## Quick Start
+
+### VPS Setup
 1. Copy [vps-setup.sh](file:///C:/Users/Andres/Desktop/recuperacion/vps-setup.sh) to your VPS and run it to install Docker and Docker Compose
 2. Reboot your VPS after setup
 3. Configure your DNS to point your subdomain (e.g., puglla.yourdomain.com) to your VPS IP address
-4. Copy [nginx.conf](file:///C:/Users/Andres/Desktop/recuperacion/nginx.conf) to `/etc/nginx/sites-available/recuperacion` and create a symlink to `sites-enabled`
 
 ## Deployment Options
 
