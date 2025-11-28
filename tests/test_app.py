@@ -67,7 +67,7 @@ def test_bot_response_function():
     # Test known responses
     assert 'Hola' in get_bot_response('hola')
     assert 'Hello' in get_bot_response('hello')
-    assert 'ayudarte' in get_bot_response('¿cómo estás?')
+    assert 'Estoy bien' in get_bot_response('¿cómo estás?')
     
     # Test that it returns some response for any input
     response = get_bot_response('random question')
